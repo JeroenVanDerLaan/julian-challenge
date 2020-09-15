@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php
+
+use App\DeepArrayFactory;
+use App\DeepArrayMerger;
+use App\IntegerParser;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$raw = [
+    '10/9/8/7/6/5' => 'Harry',
+    '10/9/8/6' => 'Henk',
+];
+
+$integerParser = new IntegerParser();
+$deepArrayFactory = new DeepArrayFactory();
+$deepArrayMerger = new DeepArrayMerger();
+
+$result = [];
+foreach ($raw as $key => $value) {
+    $indices = $integerParser->parse($key, '/');
+    $array = $deepArrayFactory->fill($value, ...$indices);
+    $result = $deepArrayMerger->merge($result, $array);
+}
+
+var_dump($result);

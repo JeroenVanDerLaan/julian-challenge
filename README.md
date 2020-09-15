@@ -37,7 +37,13 @@ Build and start the Docker environment:
 docker-compose up -d --build
 ```
 
-Run the app within the `php` service:
+Install Composer dependencies:
+
+```sh
+docker-compose exec php composer install
+```
+
+Run the app:
 
 ```sh
 docker-compose exec php ./bin/app

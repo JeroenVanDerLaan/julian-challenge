@@ -21,7 +21,7 @@ class IntegerParser
             throw new InvalidArgumentException('Given delimiter can not be empty');
         }
         $parts = explode($delimiter, $string);
-        $parts = false !== $parts ? $parts : [];
+        $parts = false !== $parts ? $parts : []; // This line is not necessary, because you prevent empty delimiters with InvalidArgumentException. Thus, explode() always returns a string. 
         $indices = [];
         foreach ($parts as $part) {
             if (true === is_numeric($part)) {

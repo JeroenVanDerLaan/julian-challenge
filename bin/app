@@ -5,13 +5,16 @@ use App\DeepArrayFactory;
 use App\DeepArrayMerger;
 use App\IntegerParser;
 
+use App\DeepArrayUnflattener;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $raw = [
-    '10/9/8/7/6/5' => 'Harry',
-    '10/9/8/6' => 'Henk',
+    '10/9/8/7/6/5/' => 'Harry',
+    '10/9/8/6/' => 'Henk',
 ];
 
+/*
 $integerParser = new IntegerParser();
 $deepArrayFactory = new DeepArrayFactory();
 $deepArrayMerger = new DeepArrayMerger();
@@ -22,5 +25,10 @@ foreach ($raw as $key => $value) {
     $array = $deepArrayFactory->fill($value, ...$indices);
     $result = $deepArrayMerger->merge($result, $array);
 }
+*/
+
+$deepArrayUnflattener = new DeepArrayUnflattener;
+
+$result = $deepArrayUnflattener->unflatten($raw);
 
 var_dump($result);
